@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "rixxze.coderankmlbb.id",
+      "sha256_cert_fingerprints": [
+        "75:F6:15:26:86:8A:73:15:BF:4C:F2:E8:BD:10:76:ED:57:82:4E:65:78:38:79:3E:5C:9E:D7:99:55:75:11:B4"
+      ]
+    }
+  }
+]
