@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AIMXMOD • Open App</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at top, #172554 0%, #080b14 45%, #03050a 100%);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 320px;
+            height: 320px;
+            background: #2563eb;
+            filter: blur(140px);
+            opacity: 0.20;
+            top: -100px;
+            left: -100px;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: #06b6d4;
+            filter: blur(150px);
+            opacity: 0.12;
+            bottom: -100px;
+            right: -100px;
+            pointer-events: none;
+        }
+
+        .card {
+            width: calc(100% - 32px);
+            max-width: 440px;
+            padding: 34px 25px 28px;
+            border: 1px solid rgba(255,255,255,0.10);
+            border-radius: 28px;
+            background: rgba(15, 23, 42, 0.72);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow:
+                0 25px 80px rgba(0,0,0,0.45),
+                inset 0 1px 0 rgba(255,255,255,0.06);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            width: 76px;
+            height: 76px;
+            margin: 0 auto 20px;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+            box-shadow:
+                0 12px 35px rgba(37,99,235,0.35);
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -2px;
+        }
+
+        .brand {
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 27px;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 15px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.045);
+            border: 1px solid rgba(255,255,255,0.07);
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 12px #22c55e;
+            flex-shrink: 0;
+        }
+
+        .status-title {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .status-text {
+            color: #94a3b8;
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+        .open-button {
+            width: 100%;
+            border: 0;
+            border-radius: 15px;
+            padding: 16px;
+            background: linear-gradient(135deg, #2563eb, #0891b2);
+            color: white;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 12px 30px rgba(37,99,235,0.28);
+            transition: 0.2s ease;
+        }
+
+        .open-button:active {
+            transform: scale(0.97);
+        }
+
+        .open-button.loading {
+            opacity: 0.75;
+            pointer-events: none;
+        }
+
+        .info {
+            margin-top: 22px;
+            padding: 16px;
+            border-radius: 15px;
+            background: rgba(245,158,11,0.07);
+            border: 1px solid rgba(245,158,11,0.15);
+            text-align: left;
+        }
+
+        .info-title {
+            color: #fbbf24;
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .info p {
+            margin: 0;
+            color: #cbd5e1;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .divider {
+            height: 1px;
+            background: rgba(255,255,255,0.07);
+            margin: 24px 0 18px;
+        }
+
+        .footer-id {
+            color: #64748b;
+            font-size: 10px;
+            word-break: break-all;
+        }
+
+        .spinner {
+            display: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .lang {
+            margin-top: 18px;
+            color: #64748b;
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="logo">
+        AX
+    </div>
+
+    <div class="brand">
+        AIMXMOD
+    </div>
+
+    <div class="subtitle">
+        Secure App Link • Deep Link
+    </div>
+
+    <div class="status">
+
+        <div class="status-dot"></div>
+
+        <div>
+            <div class="status-title">
+                Link siap dibuka
+            </div>
+
+            <div class="status-text">
+                Link ready to open the application
+            </div>
+        </div>
+
+    </div>
+
+    <button class="open-button" id="openButton" onclick="openApp()">
+        Buka Aplikasi
+        <br>
+        <span style="font-size:11px;opacity:.75;">
+            Open Application
+        </span>
+    </button>
+
+    <div class="info">
+
+        <div class="info-title">
+            ⚠ Jika aplikasi tidak terbuka
+        </div>
+
+        <p>
+            Jika setelah menekan tombol aplikasi tidak terbuka secara otomatis,
+            buka pengaturan aplikasi AIMXMOD lalu aktifkan izin
+            <b>"Buka link yang didukung"</b> atau
+            <b>"Open supported links"</b>.
+            <br><br>
+            If the application does not open automatically, open the AIMXMOD
+            app settings and enable
+            <b>"Open supported links"</b>.
+        </p>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="footer-id">
+        Secure connection • AIMXMOD
+    </div>
+
+    <div class="lang">
+        Bahasa Indonesia • English
+    </div>
+
+</div>
+
+
+<script>
+
+function openApp() {
+
+    const button = document.getElementById("openButton");
+
+    button.classList.add("loading");
+
+    button.innerHTML = `
+        <div class="spinner" style="display:block;"></div>
+        <div style="margin-top:8px;font-size:11px;">
+            Membuka aplikasi...<br>
+            Opening application...
+        </div>
+    `;
+
+    /*
+     * Menggunakan URL halaman yang sedang dibuka.
+     *
+     * Contoh:
+     * https://aimxmod.github.io/open/72655gwg
+     *
+     * URL tersebut tetap sama ketika dicoba dibuka.
+     */
+
+    const currentUrl = window.location.href;
+
+    window.location.href = currentUrl;
+
+}
+
+</script>
+
+</body>
+</html>
