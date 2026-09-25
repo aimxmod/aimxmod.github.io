@@ -223,8 +223,8 @@
 
     </div>
 
-    <button class="open-button" id="openButton" onclick="openApp()">
-        Buka Aplikasi
+    <button style="font-size:18px" class="open-button" id="openButton" onclick="openApp()">
+        Register Now
         <br>
         <span style="font-size:11px;opacity:.75;">
             Open Application
@@ -279,11 +279,34 @@ function openApp() {
         </div>
     `;
 
-    const url = new URL(window.location.href);
+    const path = window.location.pathname;
 
-    url.searchParams.set("open", Date.now());
+    /*
+     * Contoh:
+     *
+     * /open/uuwh62662hh
+     *
+     * akan menjadi:
+     *
+     * /open/verification/openuuwh62662hh
+     */
 
-    window.location.href = url.toString();
+    if (path.startsWith("/open/")) {
+
+        const id = path.substring("/open/".length);
+
+        const verificationUrl =
+            window.location.origin +
+            "/open/verification/open" +
+            id;
+
+        window.location.href = verificationUrl;
+
+    } else {
+
+        window.location.href = "/";
+
+    }
 }
 
 </script>
