@@ -279,10 +279,17 @@ function openApp() {
         </div>
     `;
 
-    const currentUrl = window.location.href;
+    const path = window.location.pathname;
 
-    window.location.href = currentUrl;
+    const intentUrl =
+        "intent://" +
+        path.substring(1) +
+        "#Intent;" +
+        "scheme=https;" +
+        "package=rixxze.coderankmlbb.id;" +
+        "end";
 
+    window.location.href = intentUrl;
 }
 
 </script>
